@@ -12,10 +12,10 @@ if (isset($_POST["submit"])) {
     require_once 'functions.inc.php';
 
     if (emptyInputSignup($username, $emailAdd, $userId, $pwd, $rePwd) !== false) {
-    header("location: ../signup.php?error=emptyinput");
-    exit();
+        header("location: ../signup.php?error=emptyinput");
+        exit();
     }
-    if (invalidUid($username) !== false){
+    if (invalidUid($username) !== false) {
         header("location: ../signup.php?error=invaliduid");
         exit();
     }
@@ -27,15 +27,14 @@ if (isset($_POST["submit"])) {
         header("location: ../signup.php?error=pwdmatcherror");
         exit();
     }
-    if (uidExists($conn, $username) !== false) {
+    if (uidExists($conn, $username, $emailAdd) !== false) {
         header("location: ../signup.php?error=usernametaken");
         exit();
     }
 
     createUser($conn, $username, $emailAdd, $pwd);
-    
-    else
-    {
+    }
+    else {
         header("location: ../signup.php");
         exit();
     }
@@ -45,6 +44,7 @@ if (isset($_POST["submit"])) {
 
     var_dump($_POST[]);
 
-} else {
+
+    else {
     header("location: ../signup.php");
 }
